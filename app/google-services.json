@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134321014903",
+    "project_id": "stocknow-fdbb1",
+    "storage_bucket": "stocknow-fdbb1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134321014903:android:a40907e9f40aded125de72",
+        "android_client_info": {
+          "package_name": "com.example.composition"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI_nP7xbQhheX7JWTPOS94wwIr0H_ql7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
