@@ -2,8 +2,8 @@ package com.example.composition.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.*
-import com.example.composition.ui.screens.OnboardingScreen
-import com.example.composition.ui.screens.SplashScreen
+import com.example.composition.ui.screens.*
+
 
 /**
  * Gère la navigation principale de l'application.
@@ -14,7 +14,6 @@ import com.example.composition.ui.screens.SplashScreen
 @Composable
 fun AppNavigation() {
 
-    // Contrôleur utilisé pour gérer les changements d'écran
     val navController = rememberNavController()
 
     NavHost(
@@ -22,19 +21,26 @@ fun AppNavigation() {
         startDestination = "splash"
     ) {
 
-        // Écran de démarrage
         composable("splash") {
 
             SplashScreen(navController)
         }
 
-        // Écran d'onboarding
         composable("onboarding") {
 
             OnboardingScreen(navController)
         }
 
-        // Futur écran principal de l'application
+        composable("login") {
+
+            LoginScreen(navController)
+        }
+
+        composable("register") {
+
+            RegisterScreen(navController)
+        }
+
         composable("home") {
 
         }

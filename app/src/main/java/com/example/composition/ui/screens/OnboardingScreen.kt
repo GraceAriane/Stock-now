@@ -106,7 +106,7 @@ fun OnboardingScreen(
                             } else {
 
                                 // Redirection vers l'écran principal
-                                navController.navigate("home")
+                                navController.navigate("login")
                             }
                         }
                     }

@@ -15,3 +15,7 @@ val BackgroundGray = Color(0xFFF5F3F3)
 val DarkText = Color(0xFF2D2D2D)
 val LightText = Color(0xFF6D6D6D)
 val IndicatorInactive = Color(0xFFB0B0B0)
+
+val TextFieldBorder = Color(0xFFE0E0E0)
+
+val ErrorRed = Color(0xFFD32F2F)

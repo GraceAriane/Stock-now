@@ -27,7 +27,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
 
         // Temps d'affichage du splash screen
-        delay(1500)
+        delay(1200)
 
         navController.navigate("onboarding") {
 
