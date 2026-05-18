@@ -90,7 +90,7 @@ fun LoginScreen(
                     !passwordError
                 ) {
 
-                    navController.navigate("home")
+                    navController.navigate("dashboard")
                 }
             }
         )
