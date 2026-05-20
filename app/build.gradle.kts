@@ -12,10 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.composition"
         minSdk = 24
-
-        // 2. Change targetSdk de 34 à 35
         targetSdk = 35
-
         versionCode = 1
         versionName = "1.0"
 
@@ -56,12 +53,15 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
-    // Mises à jour des versions pour la compatibilité
+    // Icons
+    implementation("androidx.compose.material:material-icons-extended")
+    
+    // Navigation et Images
     implementation("androidx.navigation:navigation-compose:2.8.5")
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("androidx.compose.foundation:foundation")
     
-    // Firebase BoM (Bill of Materials) - Gère les versions pour vous
+    // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")

@@ -1,9 +1,7 @@
-package com.example.stocknow.data.models
+package com.example.composition.data.models
 
 data class UserSettings(
-    val userId: String = "",
-    val notificationsActivees: Boolean = true,
-    val langue: String = "Français",
-    val modeSombre: Boolean = false,
-    val devise: String = "FCFA"
+    val theme: String = "Clair",
+    val notificationsEnabled: Boolean = true,
+    val language: String = "Français"
 )

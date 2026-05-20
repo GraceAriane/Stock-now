@@ -1,4 +1,4 @@
-package com.example.stocknow.screens.history
+package com.example.composition.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stocknow.ui.viewmodels.HistoriqueViewModel
+import com.example.composition.ui.viewmodels.HistoriqueViewModel
 
 private val PrimaryColor = Color(0xFF0F766E)
 
@@ -38,7 +38,7 @@ data class HistoryItem(
 @Composable
 fun HistoryScreen(viewModel: HistoriqueViewModel = viewModel()) {
 
-    // 1. On observe les données réelles du ViewModel
+    // On observe les données réelles du ViewModel
     val movementsFirebase by viewModel.mouvements
 
     Column(
@@ -292,10 +292,4 @@ fun HistoryCard(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HistoryPreview() {
-    HistoryScreen()
 }

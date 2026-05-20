@@ -1,4 +1,4 @@
-package com.example.stocknow.data.models
+package com.example.composition.data.models
 
 data class Alertes(
     val id: String = "",

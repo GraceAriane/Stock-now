@@ -1,5 +1,6 @@
 package com.example.composition.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,34 +10,28 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.composition.navigation.Screen
 import com.example.composition.ui.components.*
 import com.example.composition.ui.theme.BackgroundGray
 import com.example.composition.ui.theme.PrimaryGreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun LoginScreen(
     navController: NavController
 ) {
-
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
-
-    var emailError by remember {
-        mutableStateOf(false)
-    }
-
-    var passwordError by remember {
-        mutableStateOf(false)
-    }
+    val context = LocalContext.current
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var emailError by remember { mutableStateOf(false) }
+    var passwordError by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -45,7 +40,6 @@ fun LoginScreen(
             .padding(horizontal = 24.dp)
             .verticalScroll(rememberScrollState())
     ) {
-
         Spacer(modifier = Modifier.height(80.dp))
 
         AuthHeader(
@@ -57,9 +51,7 @@ fun LoginScreen(
 
         AppTextField(
             value = email,
-            onValueChange = {
-                email = it
-            },
+            onValueChange = { email = it; emailError = false },
             placeholder = "Adresse email",
             isError = emailError
         )
@@ -68,32 +60,42 @@ fun LoginScreen(
 
         PasswordTextField(
             value = password,
-            onValueChange = {
-                password = it
-            },
+            onValueChange = { password = it; passwordError = false },
             placeholder = "Mot de passe",
             isError = passwordError
         )
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        PrimaryButton(
-            text = "Se connecter",
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.fillMaxWidth().wrapContentWidth(),
+                color = PrimaryGreen
+            )
+        } else {
+            PrimaryButton(
+                text = "Se connecter",
+                onClick = {
+                    emailError = !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                    passwordError = password.isBlank()
 
-            onClick = {
-
-                emailError = email.isBlank()
-                passwordError = password.isBlank()
-
-                if (
-                    !emailError &&
-                    !passwordError
-                ) {
-
-                    navController.navigate("home")
+                    if (!emailError && !passwordError) {
+                        isLoading = true
+                        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                            .addOnSuccessListener {
+                                isLoading = false
+                                navController.navigate(Screen.Home.route) {
+                                    popUpTo(Screen.Login.route) { inclusive = true }
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                isLoading = false
+                                Toast.makeText(context, "Erreur: ${e.message}", Toast.LENGTH_LONG).show()
+                            }
+                    }
                 }
-            }
-        )
+            )
+        }
 
         Spacer(modifier = Modifier.height(26.dp))
 
@@ -101,21 +103,22 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-
-            Text(
-                text = "Pas encore de compte ? "
-            )
-
+            Text(text = "Pas encore de compte ? ")
             Text(
                 text = "S'inscrire",
                 color = PrimaryGreen,
                 fontWeight = FontWeight.Bold,
-
                 modifier = Modifier.clickable {
-
-                    navController.navigate("register")
+                    navController.navigate(Screen.Register.route)
                 }
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginPreview() {
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }

@@ -1,4 +1,4 @@
-package com.example.stocknow.ui.viewmodels
+package com.example.composition.ui.viewmodels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

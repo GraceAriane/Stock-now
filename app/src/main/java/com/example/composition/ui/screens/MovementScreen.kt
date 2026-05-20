@@ -1,4 +1,4 @@
-package com.example.stocknow.screens.movement
+package com.example.composition.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stocknow.ui.viewmodels.MovementViewModel
+import com.example.composition.ui.viewmodels.MovementViewModel
 
 private val PrimaryColor = Color(0xFF0F766E)
 
@@ -38,10 +38,8 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
         // HEADER
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement =
-                Arrangement.SpaceBetween,
-            verticalAlignment =
-                Alignment.CenterVertically
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             Text(
@@ -50,10 +48,7 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
                 fontWeight = FontWeight.Bold
             )
 
-            IconButton(
-                onClick = { }
-            ) {
-
+            IconButton(onClick = { }) {
                 Icon(
                     imageVector = Icons.Outlined.CalendarMonth,
                     contentDescription = null,
@@ -67,16 +62,9 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
         // CARD FORMULAIRE
         Card(
             modifier = Modifier.fillMaxWidth(),
-
             shape = RoundedCornerShape(24.dp),
-
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
-
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 4.dp
-            )
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
 
             Column(
@@ -85,7 +73,7 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
                     .padding(18.dp)
             ) {
 
-                // TYPE (Lié au ViewModel)
+                // TYPE
                 Text(
                     text = "Type",
                     fontWeight = FontWeight.Medium
@@ -96,24 +84,17 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
                 OutlinedTextField(
                     value = viewModel.typeSelectionne.value,
                     onValueChange = { viewModel.typeSelectionne.value = it },
-
                     modifier = Modifier.fillMaxWidth(),
-
                     trailingIcon = {
-
                         Icon(
-                            imageVector =
-                                Icons.Outlined.KeyboardArrowDown,
+                            imageVector = Icons.Outlined.KeyboardArrowDown,
                             contentDescription = null
                         )
                     },
-
                     shape = RoundedCornerShape(14.dp),
-
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = PrimaryColor,
-                        unfocusedBorderColor =
-                            Color.LightGray
+                        unfocusedBorderColor = Color.LightGray
                     )
                 )
 
@@ -129,48 +110,26 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
 
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-
                     shape = RoundedCornerShape(16.dp),
-
-                    colors = CardDefaults.cardColors(
-                        containerColor =
-                            Color(0xFFF9F9F9)
-                    )
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF9F9F9))
                 ) {
 
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(14.dp),
-
-                        verticalAlignment =
-                            Alignment.CenterVertically,
-
-                        horizontalArrangement =
-                            Arrangement.SpaceBetween
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
 
-                        Row(
-                            verticalAlignment =
-                                Alignment.CenterVertically
-                        ) {
-
-                            Text(
-                                text = "🧴",
-                                fontSize = 28.sp
-                            )
-
-                            Spacer(
-                                modifier =
-                                    Modifier.width(12.dp)
-                            )
-
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(text = "🧴", fontSize = 28.sp)
+                            Spacer(modifier = Modifier.width(12.dp))
                             Text(text = viewModel.nomProduit.value.ifEmpty { "huile" }, fontSize = 16.sp)
                         }
 
                         Icon(
-                            imageVector =
-                                Icons.Outlined.KeyboardArrowDown,
+                            imageVector = Icons.Outlined.KeyboardArrowDown,
                             contentDescription = null,
                             tint = Color.Gray
                         )
@@ -189,28 +148,18 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
 
                 OutlinedTextField(
                     value = quantity,
-
-                    onValueChange = {
-                        quantity = it
-                    },
-
+                    onValueChange = { quantity = it },
                     modifier = Modifier.fillMaxWidth(),
-
                     trailingIcon = {
-
                         Icon(
-                            imageVector =
-                                Icons.Outlined.KeyboardArrowDown,
+                            imageVector = Icons.Outlined.KeyboardArrowDown,
                             contentDescription = null
                         )
                     },
-
                     shape = RoundedCornerShape(14.dp),
-
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = PrimaryColor,
-                        unfocusedBorderColor =
-                            Color.LightGray
+                        unfocusedBorderColor = Color.LightGray
                     )
                 )
 
@@ -227,24 +176,17 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
                 OutlinedTextField(
                     value = "24 avr. 2024",
                     onValueChange = { },
-
                     modifier = Modifier.fillMaxWidth(),
-
                     trailingIcon = {
-
                         Icon(
-                            imageVector =
-                                Icons.Outlined.CalendarMonth,
+                            imageVector = Icons.Outlined.CalendarMonth,
                             contentDescription = null
                         )
                     },
-
                     shape = RoundedCornerShape(14.dp),
-
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = PrimaryColor,
-                        unfocusedBorderColor =
-                            Color.LightGray
+                        unfocusedBorderColor = Color.LightGray
                     )
                 )
 
@@ -253,37 +195,17 @@ fun MovementScreen(viewModel: MovementViewModel = viewModel()) {
                 // BOUTON
                 Button(
                     onClick = { },
-
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(52.dp),
-
                     shape = RoundedCornerShape(16.dp),
-
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = PrimaryColor
-                    )
+                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryColor)
                 ) {
-
-                    Icon(
-                        imageVector = Icons.Outlined.Save,
-                        contentDescription = null
-                    )
-
+                    Icon(imageVector = Icons.Outlined.Save, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-
-                    Text(
-                        text = "Enregistrer",
-                        fontSize = 16.sp
-                    )
+                    Text(text = "Enregistrer", fontSize = 16.sp)
                 }
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MovementPreview() {
-    MovementScreen()
 }

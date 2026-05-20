@@ -1,6 +1,5 @@
 package com.example.composition.ui.screens
 
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -9,8 +8,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.composition.data.onboardingPages
 import com.example.composition.ui.components.Indicator
 import com.example.composition.ui.components.OnboardingPage
@@ -114,4 +115,11 @@ fun OnboardingScreen(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OnboardingPreview() {
+    val navController = rememberNavController()
+    OnboardingScreen(navController = navController)
 }

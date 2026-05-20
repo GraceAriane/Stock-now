@@ -1,8 +1,8 @@
-package com.example.stocknow.ui.viewmodels
+package com.example.composition.ui.viewmodels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.stocknow.data.models.UserSettings
+import com.example.composition.data.models.UserSettings
 
 class SettingsViewModel : ViewModel() {
     // État des paramètres
@@ -15,14 +15,13 @@ class SettingsViewModel : ViewModel() {
     private fun chargerParametres() {
         // Simulation des réglages actuels
         settings.value = UserSettings(
-            notificationsActivees = true,
-            langue = "Français",
-            modeSombre = false
+            notificationsEnabled = true,
+            language = "Français",
+            theme = "Clair"
         )
     }
 
     fun toggleNotifications(enabled: Boolean) {
-        settings.value = settings.value.copy(notificationsActivees = enabled)
-        // TODO: Sauvegarder dans Firebase après le merge
+        settings.value = settings.value.copy(notificationsEnabled = enabled)
     }
 }

@@ -1,8 +1,8 @@
-package com.example.stocknow.data.models
+package com.example.composition.data.models
 
 data class User(
-    val uid: String = "",
-    val nom: String = "",
+    val id: String = "",
+    val fullName: String = "",
     val email: String = "",
-    val role: String = "employé" // "admin" ou "employé"
+    val createdAt: Long = 0
 )

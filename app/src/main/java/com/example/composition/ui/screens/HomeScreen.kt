@@ -1,4 +1,4 @@
-package com.example.stocknow.screens.home
+package com.example.composition.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -31,121 +31,94 @@ fun HomeScreen() {
         Product("Écran Samsung", 5)
     )
 
-    LazyColumn(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5F5))
-            .padding(16.dp)
     ) {
-
-        item {
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement =
-                    Arrangement.SpaceBetween,
-                verticalAlignment =
-                    Alignment.CenterVertically
-            ) {
-
-                Column {
-
-                    Text(
-                        text = "Bonjour Ashley 👋",
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Text(
-                        text = "Gestion de stock",
-                        color = Color.Gray
-                    )
-                }
-
-                IconButton(
-                    onClick = { }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
+                    Column {
+                        Text(
+                            text = "Bonjour Ashley 👋",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Gestion de stock",
+                            color = Color.Gray
+                        )
+                    }
 
-                    Icon(
-                        imageVector =
-                            Icons.Outlined.Notifications,
-                        contentDescription = null
-                    )
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Notifications,
+                            contentDescription = null
+                        )
+                    }
                 }
+
+                Spacer(modifier = Modifier.height(24.dp))
+                StatsSection()
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Text(
+                    text = "Produits récents",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(12.dp))
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            items(products) { product ->
+                ProductCard(product)
+            }
 
-            StatsSection()
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = "Produits récents",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-        }
-
-        items(products) { product ->
-
-            ProductCard(product)
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(80.dp))
+            item {
+                Spacer(modifier = Modifier.height(80.dp))
+            }
         }
     }
 }
 
 @Composable
 fun StatsSection() {
-
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement =
-            Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
         StatCard("Produits", "124")
         StatCard("Stock", "840")
     }
 }
 
 @Composable
-fun StatCard(
-    title: String,
-    value: String
-) {
-
+fun StatCard(title: String, value: String) {
     Card(
         modifier = Modifier
             .width(160.dp)
             .height(110.dp),
-
         shape = RoundedCornerShape(20.dp),
-
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF0F766E)
         )
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-
-            verticalArrangement =
-                Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-
-            Text(
-                text = title,
-                color = Color.White
-            )
-
+            Text(text = title, color = Color.White)
             Text(
                 text = value,
                 color = Color.White,
@@ -158,38 +131,29 @@ fun StatCard(
 
 @Composable
 fun ProductCard(product: Product) {
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-
         shape = RoundedCornerShape(18.dp)
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(18.dp),
-
-            horizontalArrangement =
-                Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
             Column {
-
                 Text(
                     text = product.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
                 )
-
                 Text(
                     text = "Produit disponible",
                     color = Color.Gray
                 )
             }
-
             Text(
                 text = "${product.quantity}",
                 fontWeight = FontWeight.Bold,

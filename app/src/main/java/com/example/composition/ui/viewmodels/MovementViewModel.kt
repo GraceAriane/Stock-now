@@ -1,8 +1,8 @@
-package com.example.stocknow.ui.viewmodels
+package com.example.composition.ui.viewmodels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.stocknow.data.models.Movement
+import com.example.composition.data.models.Movement
 
 class MovementViewModel : ViewModel() {
     // États pour les champs du formulaire
@@ -31,8 +31,7 @@ class MovementViewModel : ViewModel() {
             date = System.currentTimeMillis() // On utilise un vrai timestamp
         )
 
-        // TODO: Appel au repository Firebase (sera fait après le merge)
-        // Pour l'instant, on simule un succès
+        // Simule un succès
         statusMessage.value = "Enregistrement réussi !"
         isSaving.value = false
     }
