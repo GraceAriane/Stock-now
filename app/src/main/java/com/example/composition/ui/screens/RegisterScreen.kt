@@ -115,7 +115,7 @@ fun RegisterScreen(navController: NavController) {
                                         .set(userMap)
                                         .addOnSuccessListener {
                                             isLoading = false
-                                            navController.navigate(Screen.Home.route) {
+                                            navController.navigate(Screen.Dashboard.route) {
                                                 popUpTo(Screen.Register.route) { inclusive = true }
                                             }
                                         }

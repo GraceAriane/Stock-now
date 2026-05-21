@@ -1,32 +1,14 @@
-package com.example.composition.ui.theme.screens
+package com.example.composition.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.composition.R
 import com.example.composition.ui.theme.CompositionTheme
-import com.example.composition.ui.theme.data.ProduitRupture
 
 @Composable
 fun DashboardScreen(navController: NavController) {
@@ -53,6 +34,7 @@ fun DashboardScreen(navController: NavController) {
     val maxVente = 40
     val barColor = Color(0xFF01596D)
 
+    // Simulation de données de rupture
     val ruptures = listOf(
         ProduitRupture("Produit A", "10", "Faible")
     )
@@ -77,10 +59,11 @@ fun DashboardScreen(navController: NavController) {
                     color = Color(0xFF1C1B1F)
                 )
                 IconButton(onClick = { }) {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.ic_notification),
                         contentDescription = "Notification",
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(28.dp),
+                        tint = Color.Unspecified
                     )
                 }
             }
@@ -164,10 +147,11 @@ fun DashboardScreen(navController: NavController) {
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
+                            Icon(
                                 painter = painterResource(id = R.drawable.ic_warning),
                                 contentDescription = "Rupture",
-                                modifier = Modifier.size(28.dp)
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
@@ -207,10 +191,11 @@ fun DashboardScreen(navController: NavController) {
                             horizontalArrangement = Arrangement.Center,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
+                            Icon(
                                 painter = painterResource(id = R.drawable.ic_product),
                                 contentDescription = "Produits",
-                                modifier = Modifier.size(28.dp)
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
@@ -231,98 +216,6 @@ fun DashboardScreen(navController: NavController) {
                             style = MaterialTheme.typography.bodySmall,
                             color = Color.Gray
                         )
-                    }
-                }
-            }
-        }
-
-        item {
-            Text(
-                text = "Produits en rupture",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1C1B1F),
-                modifier = Modifier.padding(top = 8.dp)
-            )
-        }
-
-        item {
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(2.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Column {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color(0xFF01596D).copy(alpha = 0.1f))
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "Nom du produit",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF01596D),
-                            modifier = Modifier.weight(2f)
-                        )
-                        Text(
-                            text = "Stock",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF01596D),
-                            modifier = Modifier.weight(1f),
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                        )
-                        Text(
-                            text = "Statut",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF01596D),
-                            modifier = Modifier.weight(1f),
-                            textAlign = androidx.compose.ui.text.style.TextAlign.End
-                        )
-                    }
-
-                    Divider(color = Color(0xFFE0E0E0), thickness = 1.dp)
-
-                    ruptures.forEach { produit ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = produit.nom,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = Color.Black,
-                                modifier = Modifier.weight(2f)
-                            )
-                            Text(
-                                text = produit.stock,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = Color.Black,
-                                modifier = Modifier.weight(1f),
-                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                            )
-                            Surface(
-                                shape = RoundedCornerShape(8.dp),
-                                color = Color(0xFF01596D)
-                            ) {
-                                Text(
-                                    text = produit.statut,
-                                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = Color.White
-                                )
-                            }
-                        }
-                        if (produit != ruptures.last()) {
-                            Divider(color = Color(0xFFEEEEEE), thickness = 1.dp)
-                        }
                     }
                 }
             }
@@ -358,6 +251,7 @@ fun BarreVerticale(mois: String, valeur: Int, couleur: Color, maxValeur: Int) {
 }
 
 data class Vente(val mois: String, val valeur: Int)
+data class ProduitRupture(val nom: String, val stock: String, val statut: String)
 
 @Preview(showBackground = true)
 @Composable

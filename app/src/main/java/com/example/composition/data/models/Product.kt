@@ -1,4 +1,4 @@
-package com.example.composition.ui.theme.data
+package com.example.composition.data.models
 
 data class Product(
     val id: String = "",

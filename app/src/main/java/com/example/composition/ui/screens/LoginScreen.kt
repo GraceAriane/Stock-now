@@ -84,7 +84,7 @@ fun LoginScreen(
                         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                             .addOnSuccessListener {
                                 isLoading = false
-                                navController.navigate(Screen.Home.route) {
+                                navController.navigate(Screen.Dashboard.route) {
                                     popUpTo(Screen.Login.route) { inclusive = true }
                                 }
                             }
@@ -119,6 +119,5 @@ fun LoginScreen(
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    val navController = rememberNavController()
-    LoginScreen(navController = navController)
+    LoginScreen(navController = rememberNavController())
 }

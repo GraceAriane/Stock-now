@@ -1,7 +1,7 @@
-package com.example.composition.ui.theme.viewmodels
+package com.example.composition.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.composition.ui.theme.data.Product
+import com.example.composition.data.models.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

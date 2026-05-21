@@ -47,8 +47,14 @@ fun AppNavigation() {
             composable(Screen.Register.route) {
                 RegisterScreen(navController)
             }
-            composable(Screen.Home.route) {
-                HomeScreen()
+            composable(Screen.Dashboard.route) {
+                DashboardScreen(navController)
+            }
+            composable(Screen.Products.route) {
+                ProductsScreen(navController)
+            }
+            composable(Screen.AddEditProduct.route) {
+                AddEditProductScreen(navController)
             }
             composable(Screen.Movement.route) {
                 MovementScreen()
@@ -63,7 +69,10 @@ fun AppNavigation() {
                 ExportScreen()
             }
             composable(Screen.Settings.route) {
-                SettingsScreen()
+                SettingsScreen(navController = navController)
+            }
+            composable(Screen.Alimentation.route) {
+                AlimentationsScreen(navController)
             }
         }
     }

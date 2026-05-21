@@ -20,6 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.composition.navigation.Screen
 import com.example.composition.ui.viewmodels.SettingsViewModel
 
 private val PrimaryColor = Color(0xFF0F766E)
@@ -27,8 +30,10 @@ private val BackgroundColor = Color(0xFFF5F5F5)
 private val CardColor = Color.White
 
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
-    // On récupère les réglages actuels du ViewModel
+fun SettingsScreen(
+    navController: NavController,
+    viewModel: SettingsViewModel = viewModel()
+) {
     val currentSettings by viewModel.settings
 
     Column(
@@ -43,52 +48,53 @@ fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
         ) {
             item {
                 Spacer(modifier = Modifier.height(20.dp))
-
                 Text(
                     text = "Paramètres",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
-
                 Spacer(modifier = Modifier.height(20.dp))
-
                 SearchSection(viewModel)
-
                 Spacer(modifier = Modifier.height(24.dp))
             }
 
             item {
                 SettingsCard(
                     icon = Icons.Outlined.Palette,
-                    title = "Thèmes"
+                    title = "Thèmes",
+                    onClick = { }
                 )
             }
 
             item {
                 SettingsCard(
                     icon = Icons.Outlined.Tune,
-                    title = "Préférences"
+                    title = "Préférences",
+                    onClick = { }
                 )
             }
 
             item {
                 SettingsCard(
                     icon = Icons.Outlined.FileDownload,
-                    title = "Exportation"
+                    title = "Exportation",
+                    onClick = { navController.navigate(Screen.Export.route) }
                 )
             }
 
             item {
                 SettingsCard(
                     icon = Icons.Outlined.History,
-                    title = "Historique"
+                    title = "Historique",
+                    onClick = { navController.navigate(Screen.History.route) }
                 )
             }
 
             item {
                 SettingsCard(
                     icon = Icons.Outlined.Settings,
-                    title = "Autres"
+                    title = "Autres",
+                    onClick = { }
                 )
             }
 
@@ -105,15 +111,8 @@ fun SearchSection(viewModel: SettingsViewModel) {
         value = "",
         onValueChange = { },
         modifier = Modifier.fillMaxWidth(),
-        placeholder = {
-            Text("Rechercher...")
-        },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Outlined.Search,
-                contentDescription = null
-            )
-        },
+        placeholder = { Text("Rechercher...") },
+        leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
         shape = RoundedCornerShape(16.dp),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = PrimaryColor,
@@ -125,20 +124,17 @@ fun SearchSection(viewModel: SettingsViewModel) {
 @Composable
 fun SettingsCard(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
-    title: String
+    title: String,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clickable { },
-        colors = CardDefaults.cardColors(
-            containerColor = CardColor
-        ),
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = CardColor),
         shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
-        )
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(
             modifier = Modifier
@@ -153,11 +149,7 @@ fun SettingsCard(
                     .background(PrimaryColor.copy(alpha = 0.1f)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                    tint = PrimaryColor
-                )
+                Icon(imageVector = icon, contentDescription = null, tint = PrimaryColor)
             }
 
             Spacer(modifier = Modifier.width(16.dp))
@@ -169,11 +161,7 @@ fun SettingsCard(
                 modifier = Modifier.weight(1f)
             )
 
-            Icon(
-                imageVector = Icons.Outlined.ChevronRight,
-                contentDescription = null,
-                tint = Color.Gray
-            )
+            Icon(imageVector = Icons.Outlined.ChevronRight, contentDescription = null, tint = Color.Gray)
         }
     }
 }
@@ -181,5 +169,5 @@ fun SettingsCard(
 @Preview(showBackground = true)
 @Composable
 fun SettingsPreview() {
-    SettingsScreen()
+    SettingsScreen(rememberNavController())
 }

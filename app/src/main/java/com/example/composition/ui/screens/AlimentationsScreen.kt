@@ -1,4 +1,4 @@
-package com.example.composition.ui.theme.screens
+package com.example.composition.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,7 +33,6 @@ data class Aliment(
     val image: Int
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlimentationsScreen(navController: NavController) {
     val aliments = listOf(
@@ -52,101 +51,102 @@ fun AlimentationsScreen(navController: NavController) {
         aliments.filter { it.nom.contains(searchQuery, ignoreCase = true) }
     }
 
-    Scaffold(containerColor = Color(0xFFF5F5F5)) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 20.dp, vertical = 16.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF5F5F5))
+            .padding(horizontal = 20.dp, vertical = 16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Retour", tint = Color.Black)
-                }
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(text = "Alimentations", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1C1C1C))
+            IconButton(onClick = { navController.popBackStack() }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Retour", tint = Color.Black)
             }
+            Spacer(modifier = Modifier.width(6.dp))
+            Text(text = "Alimentations", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1C1C1C))
+        }
 
-            Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
-            OutlinedTextField(
-                value = searchQuery,
-                onValueChange = { searchQuery = it },
-                placeholder = { Text(text = "Rechercher.....", color = Color.Gray) },
-                trailingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = Color.Gray) },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(20.dp),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color.Transparent,
-                    unfocusedBorderColor = Color.Transparent,
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White
-                )
+        OutlinedTextField(
+            value = searchQuery,
+            onValueChange = { searchQuery = it },
+            placeholder = { Text(text = "Rechercher.....", color = Color.Gray) },
+            trailingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = Color.Gray) },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            singleLine = true,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
             )
+        )
 
-            Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    IconButton(onClick = { searchQuery = "" }) {
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = null, tint = Color.DarkGray, modifier = Modifier.size(30.dp))
-                    }
-                    Text(text = "Tout vider", color = Color.Gray, fontSize = 14.sp)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton(onClick = { searchQuery = "" }) {
+                    Icon(imageVector = Icons.Default.Delete, contentDescription = null, tint = Color.DarkGray, modifier = Modifier.size(30.dp))
                 }
+                Text(text = "Tout vider", color = Color.Gray, fontSize = 14.sp)
             }
+        }
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                items(filteredAliments) { aliment ->
-                    var expanded by remember { mutableStateOf(false) }
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            items(filteredAliments) { aliment ->
+                var expanded by remember { mutableStateOf(false) }
 
-                    Card(
-                        modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded },
-                        shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.White)
-                    ) {
-                        Column {
-                            Row(
-                                modifier = Modifier.fillMaxWidth().padding(12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Image(
-                                    painter = painterResource(id = aliment.image),
-                                    contentDescription = aliment.nom,
-                                    modifier = Modifier.size(62.dp).clip(RoundedCornerShape(12.dp))
-                                )
-                                Spacer(modifier = Modifier.width(14.dp))
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(text = aliment.nom, fontSize = 18.sp, fontWeight = FontWeight.Medium, color = Color(0xFF333333))
-                                }
-                                Text(text = aliment.code, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
+                Card(
+                    modifier = Modifier.fillMaxWidth().clickable { expanded = !expanded },
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                ) {
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = aliment.image),
+                                contentDescription = aliment.nom,
+                                modifier = Modifier.size(62.dp).clip(RoundedCornerShape(12.dp))
+                            )
+                            Spacer(modifier = Modifier.width(14.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(text = aliment.nom, fontSize = 18.sp, fontWeight = FontWeight.Medium, color = Color(0xFF333333))
                             }
+                            Text(text = aliment.code, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
+                        }
 
-                            if (expanded) {
-                                HorizontalDivider(color = Color(0xFFEAEAEA))
-                                Row(
-                                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                                    horizontalArrangement = Arrangement.SpaceEvenly
-                                ) {
-                                    TextButton(onClick = { }) {
-                                        Text(text = "Modifier", color = Color(0xFF01596D))
-                                    }
-                                    TextButton(onClick = { }) {
-                                        Text(text = "Supprimer", color = Color.Red)
-                                    }
+                        if (expanded) {
+                            HorizontalDivider(color = Color(0xFFEAEAEA))
+                            Row(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                                horizontalArrangement = Arrangement.SpaceEvenly
+                            ) {
+                                TextButton(onClick = { }) {
+                                    Text(text = "Modifier", color = Color(0xFF01596D))
+                                }
+                                TextButton(onClick = { }) {
+                                    Text(text = "Supprimer", color = Color.Red)
                                 }
                             }
                         }
                     }
                 }
+            }
+            item {
+                Spacer(modifier = Modifier.height(100.dp))
             }
         }
     }

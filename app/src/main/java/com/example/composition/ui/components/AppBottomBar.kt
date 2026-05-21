@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.composition.navigation.Screen
-import com.example.composition.ui.theme.PrimaryGreen
 
 @Composable
 fun AppBottomBar(navController: NavController) {
@@ -27,15 +26,15 @@ fun AppBottomBar(navController: NavController) {
             containerColor = Color.White
         ) {
             NavigationBarItem(
-                selected = currentRoute == Screen.Home.route,
+                selected = currentRoute == Screen.Dashboard.route,
                 onClick = { 
-                    if (currentRoute != Screen.Home.route) {
-                        navController.navigate(Screen.Home.route) {
-                            popUpTo(Screen.Home.route) { inclusive = true }
+                    if (currentRoute != Screen.Dashboard.route) {
+                        navController.navigate(Screen.Dashboard.route) {
+                            popUpTo(Screen.Dashboard.route) { inclusive = true }
                         }
                     }
                 },
-                icon = { Icon(Icons.Outlined.Home, contentDescription = null) },
+                icon = { Icon(Icons.Outlined.Dashboard, contentDescription = null) },
                 label = { Text("Accueil") }
             )
 
@@ -59,14 +58,14 @@ fun AppBottomBar(navController: NavController) {
             )
 
             NavigationBarItem(
-                selected = currentRoute == Screen.History.route,
+                selected = currentRoute == Screen.Products.route,
                 onClick = { 
-                    if (currentRoute != Screen.History.route) {
-                        navController.navigate(Screen.History.route)
+                    if (currentRoute != Screen.Products.route) {
+                        navController.navigate(Screen.Products.route)
                     }
                 },
-                icon = { Icon(Icons.Outlined.History, contentDescription = null) },
-                label = { Text("Historique") }
+                icon = { Icon(Icons.Outlined.Inventory2, contentDescription = null) },
+                label = { Text("Produits") }
             )
 
             NavigationBarItem(
@@ -82,11 +81,13 @@ fun AppBottomBar(navController: NavController) {
         }
 
         FloatingActionButton(
-            onClick = { /* Action pour ajouter un produit par exemple */ },
+            onClick = { 
+                navController.navigate(Screen.AddEditProduct.route)
+            },
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .offset(y = (-28).dp),
-            containerColor = Color(0xFF0F766E), // Utilisation de la couleur primaire
+            containerColor = Color(0xFF01596D),
             contentColor = Color.White,
             shape = CircleShape
         ) {

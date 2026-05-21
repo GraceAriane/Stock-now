@@ -1,4 +1,4 @@
-package com.example.composition.ui.theme.screens
+package com.example.composition.ui.screens
 
 import android.app.Activity
 import android.content.Intent
@@ -29,8 +29,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.composition.ui.theme.CompositionTheme
-import com.example.composition.ui.theme.viewmodels.AddEditProductViewModel
-import com.example.composition.ui.theme.viewmodels.ProductsViewModel
+import com.example.composition.ui.viewmodels.AddEditProductViewModel
+import com.example.composition.ui.viewmodels.ProductsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
